@@ -1,6 +1,6 @@
 FROM prom/prometheus:latest
 
-ADD config.yaml /etc/prometheus/
+ADD prometheus.yml /etc/prometheus/
 
 EXPOSE 9090
 
