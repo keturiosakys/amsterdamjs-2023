@@ -4,33 +4,35 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  '@autometrics/autometrics':
-    specifier: ^0.7.0
-    version: 0.7.0
-  '@autometrics/exporter-prometheus':
-    specifier: ^0.7.1
-    version: 0.7.1
-  '@biomejs/biome':
-    specifier: ^1.2.2
-    version: 1.2.2
-  '@hono/node-server':
-    specifier: ^1.1.0
-    version: 1.1.0
-  '@huggingface/inference':
-    specifier: ^2.6.1
-    version: 2.6.1
-  hono:
-    specifier: ^3.7.2
-    version: 3.7.2
+importers:
 
-devDependencies:
-  '@types/node':
-    specifier: ^20.7.1
-    version: 20.7.1
-  tsx:
-    specifier: ^3.12.2
-    version: 3.12.2
+  packages/alt-text-api:
+    dependencies:
+      '@autometrics/autometrics':
+        specifier: ^0.7.0
+        version: 0.7.0
+      '@autometrics/exporter-prometheus':
+        specifier: ^0.7.1
+        version: 0.7.1
+      '@biomejs/biome':
+        specifier: ^1.2.2
+        version: 1.2.2
+      '@hono/node-server':
+        specifier: ^1.1.0
+        version: 1.1.0
+      '@huggingface/inference':
+        specifier: ^2.6.1
+        version: 2.6.1
+      hono:
+        specifier: ^3.7.2
+        version: 3.7.2
+    devDependencies:
+      '@types/node':
+        specifier: ^20.7.1
+        version: 20.7.1
+      tsx:
+        specifier: ^3.12.2
+        version: 3.12.2
 
 packages:
 

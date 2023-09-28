@@ -1,7 +1,9 @@
 {
+	"name": "demo-alt-text",
 	"type": "module",
 	"scripts": {
-		"start": "node --env-file .env --loader tsx src/server.ts"
+		"dev": "node --env-file .env --loader tsx src/server.ts",
+		"start": "node --loader tsx src/server.ts"
 	},
 	"dependencies": {
 		"@autometrics/autometrics": "^0.7.0",
