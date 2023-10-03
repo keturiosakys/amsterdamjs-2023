@@ -12,13 +12,10 @@
 		"@hono/node-server": "^1.1.0",
 		"@huggingface/inference": "^2.6.1",
 		"hono": "^3.7.2",
-		"image-size": "^1.0.2",
-		"sharp": "^0.32.6",
-		"tesseract-wasm": "^0.10.0",
-		"tesseract.js": "^5.0.0"
+		"tesseract.js": "^5.0.0",
+		"tsx": "^3.12.2"
 	},
 	"devDependencies": {
-		"@types/node": "^20.7.1",
-		"tsx": "^3.12.2"
+		"@types/node": "^20.7.1"
 	}
 }

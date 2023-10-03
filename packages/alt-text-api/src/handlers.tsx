@@ -3,8 +3,7 @@ import { Context } from "hono";
 import { runOcr } from "./ocr";
 import { imageToText } from "@huggingface/inference";
 import { FileUpload } from "./components";
-import { Logger, accessToken, mode, model, ocrLogger } from "./util";
-
+import { accessToken, model } from "./util";
 
 if (!accessToken) {
 	throw new Error("Missing HF_TOKEN");
@@ -16,32 +15,17 @@ export async function handleRoot(ctx: Context) {
 
 export async function handleImageOcr(ctx: Context) {
 	const body = await ctx.req.parseBody();
-	const fullUrl = ctx.req.raw.url;
 	const imageFile = body.image;
 
 	if (!imageFile || !(imageFile instanceof File)) {
 		return ctx.html("<h1>400 dawg, check your request</h1>", 400);
 	}
 
-	const imageName = `${Date.now()}-${imageFile.name}`;
-	const tmpDir = mode === "production" ? "/tmp" : "./tmp";
-	const tmpUploadedImage = `${tmpDir}/${imageName}`;
-	const tmpUrl = `${fullUrl}/${imageName}`;
+	const imageBuffer = Buffer.from(await imageFile.arrayBuffer());
 
-	const imageData = new Uint8Array(await imageFile.arrayBuffer());
+	const parsedText = await runOcr(imageBuffer);
 
-	await writeFile(tmpUploadedImage, imageData);
-	ocrLogger.log("Wrote image to tmp: ", tmpUploadedImage);
-
-	const parsedText = await runOcr(tmpUrl, imageData);
-	ocrLogger.log("Got parsed text, deleting image");
-	await unlink(tmpUploadedImage);
-	ocrLogger.log("Deleted image")
-
-	return ctx.html(
-		parsedText,
-		200,
-	);
+	return ctx.html(parsedText, 200);
 }
 
 export async function handleImageCaptioning(ctx: Context) {
