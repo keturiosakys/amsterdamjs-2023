@@ -1,6 +1,7 @@
 import { autometrics } from "@autometrics/autometrics";
 import sharp from "sharp";
 import { createWorker } from "tesseract.js";
+import { ocrLogger } from "./util";
 
 export type ImageProperties = {
 	width: number;
@@ -20,7 +21,7 @@ export const runOcr = autometrics(async function runOcr(
 		logger: (m) => console.log(m),
 	});
 
-	console.log("Loading image into OCR worker from: ", imageFilePath);
+	ocrLogger.log("Loading image into OCR worker from: ", imageFilePath);
 
 	const {
 		data: { text },

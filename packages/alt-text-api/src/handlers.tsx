@@ -2,13 +2,9 @@ import { unlink, writeFile } from "fs/promises";
 import { Context } from "hono";
 import { runOcr } from "./ocr";
 import { imageToText } from "@huggingface/inference";
-import { Layout, FileUpload } from "./components";
-import { html } from "hono/html";
+import { FileUpload } from "./components";
+import { Logger, accessToken, mode, model, ocrLogger } from "./util";
 
-const accessToken = process.env.HF_TOKEN;
-
-const model = "Salesforce/blip-image-captioning-large";
-const mode = process.env.NODE_ENV ?? "";
 
 if (!accessToken) {
 	throw new Error("Missing HF_TOKEN");
@@ -35,12 +31,12 @@ export async function handleImageOcr(ctx: Context) {
 	const imageData = new Uint8Array(await imageFile.arrayBuffer());
 
 	await writeFile(tmpUploadedImage, imageData);
-	console.log("Wrote image to tmp: ", tmpUploadedImage);
+	ocrLogger.log("Wrote image to tmp: ", tmpUploadedImage);
 
 	const parsedText = await runOcr(tmpUrl, imageData);
-	console.log("Got parsed text, deleting image");
+	ocrLogger.log("Got parsed text, deleting image");
 	await unlink(tmpUploadedImage);
-	console.log("Deleted image")
+	ocrLogger.log("Deleted image")
 
 	return ctx.html(
 		parsedText,
