@@ -70,7 +70,7 @@ async function handleImageOcr(ctx: Context) {
 	}
 
 	const imageName = `${Date.now()}-${imageFile.name}`;
-	const tmpUploadedImage = `tmp/${imageName}`;
+	const tmpUploadedImage = `/tmp/${imageName}`;
 	const tmpUrl = `${fullUrl}/${imageName}`;
 
 	const imageData = new Uint8Array(await imageFile.arrayBuffer());
@@ -109,7 +109,7 @@ app.post(
 app.use(
 	"/api/image-ocr/*",
 	serveStatic({
-		root: "./tmp",
+		root: "/tmp",
 		rewriteRequestPath: (path) => path.replace("/api/image-ocr", ""),
 	}),
 );
