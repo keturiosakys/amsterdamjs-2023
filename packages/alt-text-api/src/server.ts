@@ -1,30 +1,21 @@
 import {
-	autometrics,
 	Objective,
-	ObjectivePercentile,
 	ObjectiveLatency,
+	ObjectivePercentile,
+	autometrics,
 } from "@autometrics/autometrics";
 import { init } from "@autometrics/exporter-prometheus";
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { imageToText } from "@huggingface/inference";
 import { Context, Hono } from "hono";
 import { logger } from "hono/logger";
-import { runOcr } from "./ocr";
-import { unlink, writeFile } from "fs/promises";
-import { File } from "buffer";
+import { handleImageCaptioning, handleImageOcr, handleRoot } from "./handlers";
 
 const app = new Hono();
 
 init();
 
-const accessToken = process.env.HF_TOKEN;
-
-const model = "Salesforce/blip-image-captioning-large";
-
-if (!accessToken) {
-	throw new Error("Missing HF_TOKEN");
-}
+const mode = process.env.NODE_ENV ?? "";
 
 const AltTextSLO: Objective = {
 	name: "AltTextSLO",
@@ -32,63 +23,6 @@ const AltTextSLO: Objective = {
 	latency: [ObjectiveLatency.Ms2500, ObjectivePercentile.P90],
 };
 
-function handleRoot(ctx: Context) {
-	return ctx.text("Hello Hono!");
-}
-
-async function handleImageCaptioning(ctx: Context) {
-	const body = await ctx.req.parseBody();
-	const image = body.image;
-
-	if (!image || !(image instanceof File)) {
-		return ctx.json({ error: "Missing image or image invalid format" }, 400);
-	}
-
-	const imageData = await image.arrayBuffer();
-
-	const { generated_text } = await imageToText({
-		model,
-		data: imageData,
-		accessToken: accessToken,
-	});
-
-	return ctx.json(
-		{
-			image_caption: generated_text,
-		},
-		200,
-	);
-}
-
-async function handleImageOcr(ctx: Context) {
-	const body = await ctx.req.parseBody();
-	const fullUrl = ctx.req.raw.url;
-	const imageFile = body.image;
-
-	if (!imageFile || !(imageFile instanceof File)) {
-		return ctx.json({ error: "Missing image or image invalid format" }, 400);
-	}
-
-	const imageName = `${Date.now()}-${imageFile.name}`;
-	const tmpUploadedImage = `/tmp/${imageName}`;
-	const tmpUrl = `${fullUrl}/${imageName}`;
-
-	const imageData = new Uint8Array(await imageFile.arrayBuffer());
-
-	await writeFile(tmpUploadedImage, imageData);
-
-	const parsedText = await runOcr(tmpUrl, imageData);
-	await unlink(tmpUploadedImage);
-
-	return ctx.json(
-		{
-			ocr_text: parsedText,
-		},
-		200,
-	);
-}
-
-app.get("/", (c) => c.text("Hello Hono!"));
 app.get("/", autometrics(handleRoot));
 app.post(
 	"/api/image-captioning",
@@ -109,7 +43,7 @@ app.post(
 app.use(
 	"/api/image-ocr/*",
 	serveStatic({
-		root: "/tmp",
+		root: mode === "production" ? "/tmp" : "./tmp",
 		rewriteRequestPath: (path) => path.replace("/api/image-ocr", ""),
 	}),
 );

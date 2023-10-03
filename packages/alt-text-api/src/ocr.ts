@@ -14,12 +14,13 @@ export const runOcr = autometrics(async function runOcr(
 ) {
 	const image = sharp(imageData);
 	const { width, height } = await image.metadata();
-
 	if (!width || !height) throw new Error("Couldn't get image metadata");
 
 	const worker = await createWorker("eng", 1, {
 		logger: (m) => console.log(m),
 	});
+
+	console.log("Loading image into OCR worker from: ", imageFilePath);
 
 	const {
 		data: { text },
