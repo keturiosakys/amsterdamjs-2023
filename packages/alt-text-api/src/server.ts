@@ -12,6 +12,7 @@ import { Context, Hono } from "hono";
 import { logger } from "hono/logger";
 import { runOcr } from "./ocr";
 import { unlink, writeFile } from "fs/promises";
+import { File } from "buffer";
 
 const app = new Hono();
 
