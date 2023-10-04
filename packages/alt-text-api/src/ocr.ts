@@ -9,7 +9,7 @@ export type ImageProperties = {
 
 export const runOcr = autometrics(async function runOcr(imageBuffer: Buffer) {
 	const worker = await createWorker("eng", 1, {
-		logger: (m) => console.log(m),
+		logger: (m) => console.log(JSON.stringify(m)),
 	});
 
 	const {
