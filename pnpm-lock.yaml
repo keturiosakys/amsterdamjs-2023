@@ -6,7 +6,7 @@ settings:
 
 importers:
 
-  packages/alt-text-api:
+  packages/ocr-text-api:
     dependencies:
       '@autometrics/autometrics':
         specifier: ^0.7.0
@@ -33,9 +33,15 @@ importers:
         specifier: ^3.12.2
         version: 3.12.2
     devDependencies:
+      '@autometrics/typescript-plugin':
+        specifier: file:../../../autometrics-ts/packages/typescript-plugin
+        version: file:../autometrics-ts/packages/typescript-plugin
       '@types/node':
         specifier: ^20.7.1
         version: 20.7.1
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
 
 packages:
 
@@ -558,6 +564,12 @@ packages:
       fsevents: 2.3.3
     dev: false
 
+  /typescript@5.2.2:
+    resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    dev: true
+
   /wasm-feature-detect@1.5.1:
     resolution: {integrity: sha512-GHr23qmuehNXHY4902/hJ6EV5sUANIJC3R/yMfQ7hWDg3nfhlcJfnIL96R2ohpIwa62araN6aN4bLzzzq5GXkg==}
     dev: false
@@ -576,3 +588,8 @@ packages:
   /zlibjs@0.3.1:
     resolution: {integrity: sha512-+J9RrgTKOmlxFSDHo0pI1xM6BLVUv+o0ZT9ANtCxGkjIVCCUdx9alUF8Gm+dGLKbkkkidWIHFDZHDMpfITt4+w==}
     dev: false
+
+  file:../autometrics-ts/packages/typescript-plugin:
+    resolution: {directory: ../autometrics-ts/packages/typescript-plugin, type: directory}
+    name: '@autometrics/typescript-plugin'
+    dev: true
