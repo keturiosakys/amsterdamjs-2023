@@ -16,6 +16,8 @@
 		"tsx": "^3.12.2"
 	},
 	"devDependencies": {
-		"@types/node": "^20.7.1"
+		"@autometrics/typescript-plugin": "file:../../../autometrics-ts/packages/typescript-plugin",
+		"@types/node": "^20.7.1",
+		"typescript": "^5.2.2"
 	}
 }

@@ -1,0 +1,23 @@
+{
+	"include": [
+		"src"
+	],
+	"exclude": [
+		"node_modules",
+		"tmp"
+	],
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"esModuleInterop": true,
+		"strict": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "hono/jsx",
+		"plugins": [
+			{
+				"name": "@autometrics/typescript-plugin"
+			}
+		]
+	}
+}
