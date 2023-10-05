@@ -17,7 +17,7 @@ init();
 const OcrTextSLO: Objective = {
 	name: "OcrTextSLO",
 	successRate: ObjectivePercentile.P95,
-	latency: [ObjectiveLatency.Ms2500, ObjectivePercentile.P90],
+	latency: [ObjectiveLatency.Ms250, ObjectivePercentile.P90],
 };
 
 app.get("/", autometrics(handleRoot));
