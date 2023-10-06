@@ -3,7 +3,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "node --env-file .env --loader tsx src/server.ts",
-		"start": "NODE_ENV=production node --loader tsx src/server.ts"
+		"start": "NODE_ENV=production node --loader tsx src/server.ts --require src/instrumentation.ts"
 	},
 	"dependencies": {
 		"@autometrics/autometrics": "^0.7.0",
@@ -11,12 +11,16 @@
 		"@biomejs/biome": "^1.2.2",
 		"@hono/node-server": "^1.1.0",
 		"@huggingface/inference": "^2.6.1",
+		"@opentelemetry/api": "^1.6.0",
+		"@opentelemetry/auto-instrumentations-node": "^0.39.2",
+		"@opentelemetry/exporter-trace-otlp-proto": "^0.43.0",
+		"@opentelemetry/sdk-metrics": "^1.17.0",
+		"@opentelemetry/sdk-node": "^0.43.0",
 		"hono": "^3.7.2",
 		"tesseract.js": "^5.0.0",
 		"tsx": "^3.12.2"
 	},
 	"devDependencies": {
-		"@autometrics/typescript-plugin": "file:../../../autometrics-ts/packages/typescript-plugin",
 		"@types/node": "^20.7.1",
 		"typescript": "^5.2.2"
 	}

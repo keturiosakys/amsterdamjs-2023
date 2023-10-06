@@ -7,7 +7,7 @@ import {
 import { init } from "@autometrics/exporter-prometheus";
 import { serve } from "@hono/node-server";
 import { logger } from "hono/logger";
-import { handleImageCaptioning, handleImageOcr, handleRoot } from "./handlers.js";
+import { handleImageOcr, handleRoot } from "./handlers";
 import { Hono } from "hono";
 
 const app = new Hono();
