@@ -6,7 +6,6 @@ import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentation
 import { diag, DiagConsoleLogger, DiagLogLevel } from "@opentelemetry/api";
 import { AsyncHooksContextManager } from "@opentelemetry/context-async-hooks";
 
-
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.ALL);
 
 const exportEndpoint = "http://mutual-chickens.railway.internal:4318";
@@ -20,11 +19,13 @@ const sdk = new NodeSDK({
 	traceExporter: new OTLPTraceExporter({
 		url: `${exportEndpoint}/v1/traces`,
 	}),
-	instrumentations: [getNodeAutoInstrumentations({
-		"@opentelemetry/instrumentation-fs": {
-			enabled: false
-		}
-	})],
+	instrumentations: [
+		getNodeAutoInstrumentations({
+			"@opentelemetry/instrumentation-fs": {
+				requireParentSpan: true,
+			},
+		}),
+	],
 });
 
 sdk.start();
