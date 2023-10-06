@@ -1,0 +1,199 @@
+{
+    "data": [
+        {
+            "traceID": "2876b09270671e54acf89de9df68cc07",
+            "spans": [
+                {
+                    "traceID": "2876b09270671e54acf89de9df68cc07",
+                    "spanID": "13208b8d720dd8e1",
+                    "operationName": "POST",
+                    "references": [],
+                    "startTime": 1696592347668999,
+                    "duration": 1466600,
+                    "tags": [
+                        {
+                            "key": "otel.library.name",
+                            "type": "string",
+                            "value": "@opentelemetry/instrumentation-http"
+                        },
+                        {
+                            "key": "otel.library.version",
+                            "type": "string",
+                            "value": "0.41.2"
+                        },
+                        {
+                            "key": "http.url",
+                            "type": "string",
+                            "value": "http://amsterdamjs-2023-production.up.railway.app/api/image-ocr"
+                        },
+                        {
+                            "key": "http.host",
+                            "type": "string",
+                            "value": "amsterdamjs-2023-production.up.railway.app"
+                        },
+                        {
+                            "key": "net.host.name",
+                            "type": "string",
+                            "value": "amsterdamjs-2023-production.up.railway.app"
+                        },
+                        {
+                            "key": "http.method",
+                            "type": "string",
+                            "value": "POST"
+                        },
+                        {
+                            "key": "http.scheme",
+                            "type": "string",
+                            "value": "http"
+                        },
+                        {
+                            "key": "http.client_ip",
+                            "type": "string",
+                            "value": "80.56.156.116"
+                        },
+                        {
+                            "key": "http.target",
+                            "type": "string",
+                            "value": "/api/image-ocr"
+                        },
+                        {
+                            "key": "http.user_agent",
+                            "type": "string",
+                            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+                        },
+                        {
+                            "key": "http.request_content_length_uncompressed",
+                            "type": "int64",
+                            "value": 76196
+                        },
+                        {
+                            "key": "http.flavor",
+                            "type": "string",
+                            "value": "1.1"
+                        },
+                        {
+                            "key": "net.transport",
+                            "type": "string",
+                            "value": "ip_tcp"
+                        },
+                        {
+                            "key": "net.host.ip",
+                            "type": "string",
+                            "value": "172.17.1.200"
+                        },
+                        {
+                            "key": "net.host.port",
+                            "type": "int64",
+                            "value": 8080
+                        },
+                        {
+                            "key": "net.peer.ip",
+                            "type": "string",
+                            "value": "192.168.0.2"
+                        },
+                        {
+                            "key": "net.peer.port",
+                            "type": "int64",
+                            "value": 51242
+                        },
+                        {
+                            "key": "http.status_code",
+                            "type": "int64",
+                            "value": 200
+                        },
+                        {
+                            "key": "http.status_text",
+                            "type": "string",
+                            "value": "OK"
+                        },
+                        {
+                            "key": "span.kind",
+                            "type": "string",
+                            "value": "server"
+                        },
+                        {
+                            "key": "internal.span.format",
+                            "type": "string",
+                            "value": "proto"
+                        }
+                    ],
+                    "logs": [],
+                    "processID": "p1",
+                    "warnings": null
+                }
+            ],
+            "processes": {
+                "p1": {
+                    "serviceName": "unknown_service:node",
+                    "tags": [
+                        {
+                            "key": "process.command",
+                            "type": "string",
+                            "value": "/app/dist/server.js"
+                        },
+                        {
+                            "key": "process.command_args",
+                            "type": "string",
+                            "value": "[\"/nix/store/nwm5z051xxvyk3i7gh59m911nmpl9wrs-nodejs-20.6.1/bin/node\",\"/app/dist/server.js\"]"
+                        },
+                        {
+                            "key": "process.executable.name",
+                            "type": "string",
+                            "value": "node"
+                        },
+                        {
+                            "key": "process.executable.path",
+                            "type": "string",
+                            "value": "/nix/store/nwm5z051xxvyk3i7gh59m911nmpl9wrs-nodejs-20.6.1/bin/node"
+                        },
+                        {
+                            "key": "process.owner",
+                            "type": "string",
+                            "value": "root"
+                        },
+                        {
+                            "key": "process.pid",
+                            "type": "int64",
+                            "value": 35
+                        },
+                        {
+                            "key": "process.runtime.description",
+                            "type": "string",
+                            "value": "Node.js"
+                        },
+                        {
+                            "key": "process.runtime.name",
+                            "type": "string",
+                            "value": "nodejs"
+                        },
+                        {
+                            "key": "process.runtime.version",
+                            "type": "string",
+                            "value": "20.6.1"
+                        },
+                        {
+                            "key": "telemetry.sdk.language",
+                            "type": "string",
+                            "value": "nodejs"
+                        },
+                        {
+                            "key": "telemetry.sdk.name",
+                            "type": "string",
+                            "value": "opentelemetry"
+                        },
+                        {
+                            "key": "telemetry.sdk.version",
+                            "type": "string",
+                            "value": "1.17.0"
+                        }
+                    ]
+                }
+            },
+            "warnings": null
+        }
+    ],
+    "total": 0,
+    "limit": 0,
+    "offset": 0,
+    "errors": null
+}

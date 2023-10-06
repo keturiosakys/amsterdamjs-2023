@@ -1,5 +1,6 @@
 import { autometrics } from "@autometrics/autometrics";
 import { createWorker } from "tesseract.js";
+import { tracer } from "./handlers.js";
 
 export type ImageProperties = {
 	width: number;
@@ -8,13 +9,13 @@ export type ImageProperties = {
 };
 
 export const runOcr = autometrics(async function runOcr(imageBuffer: Buffer) {
-	const worker = await createWorker("eng", 1, {
-		logger: (m) => console.log(JSON.stringify(m)),
+	return tracer.startActiveSpan("runOcr", async (activeSpan) => {
+		const worker = await createWorker("eng", 1);
+
+		const {
+			data: { text },
+		} = await worker.recognize(imageBuffer);
+
+		return text;
 	});
-
-	const {
-		data: { text },
-	} = await worker.recognize(imageBuffer);
-
-	return text;
 });
