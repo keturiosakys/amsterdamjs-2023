@@ -4,7 +4,7 @@
 	"scripts": {
 		"dev": "tsc && node dist/server.js",
 		"build": "tsc",
-		"start": "tsc && node dist/server.js --import src/instrumentation.js"
+		"start": "tsc && node dist/server.js"
 	},
 	"dependencies": {
 		"@autometrics/autometrics": "^0.7.0",
