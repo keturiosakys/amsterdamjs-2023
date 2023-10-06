@@ -1,6 +1,6 @@
 import { Context } from "hono";
 import { runOcr } from "./ocr.js";
-import { FileUpload } from "./components";
+import { FileUpload } from "./components.js";
 
 export async function handleRoot(ctx: Context) {
 	return ctx.html(<FileUpload />);

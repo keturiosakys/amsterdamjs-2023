@@ -2,8 +2,9 @@
 	"name": "demo-alt-text",
 	"type": "module",
 	"scripts": {
-		"dev": "node --env-file .env --loader tsx src/server.ts",
-		"start": "NODE_ENV=production node --loader tsx src/server.ts --require src/instrumentation.ts"
+		"dev": "tsc && node dist/server.js",
+		"build": "tsc",
+		"start": "tsc && node dist/server.js --import src/instrumentation.js"
 	},
 	"dependencies": {
 		"@autometrics/autometrics": "^0.7.0",
@@ -17,8 +18,7 @@
 		"@opentelemetry/sdk-metrics": "^1.17.0",
 		"@opentelemetry/sdk-node": "^0.43.0",
 		"hono": "^3.7.2",
-		"tesseract.js": "^5.0.0",
-		"tsx": "^3.12.2"
+		"tesseract.js": "^5.0.0"
 	},
 	"devDependencies": {
 		"@types/node": "^20.7.1",

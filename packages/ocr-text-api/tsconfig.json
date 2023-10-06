@@ -7,17 +7,14 @@
 		"tmp"
 	],
 	"compilerOptions": {
+		"outDir": "./dist",
 		"target": "ESNext",
+		"skipLibCheck": true,
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 		"esModuleInterop": true,
 		"strict": true,
 		"jsx": "react-jsx",
-		"jsxImportSource": "hono/jsx",
-		"plugins": [
-			{
-				"name": "@autometrics/typescript-plugin"
-			}
-		]
+		"jsxImportSource": "hono/jsx"
 	}
 }
