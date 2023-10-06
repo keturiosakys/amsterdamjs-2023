@@ -21,4 +21,4 @@ const sdk = new NodeSDK({
 });
 
 sdk.start();
-console.log("Tracing initialized");
+diag.info("Tracing initialized");
