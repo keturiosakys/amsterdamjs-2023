@@ -1,3 +1,6 @@
 node_modules
 .env
 packages/ocr-text-api/dist
+packages/slides/slides.iapresenter
+*.jpg
+*.jpeg
