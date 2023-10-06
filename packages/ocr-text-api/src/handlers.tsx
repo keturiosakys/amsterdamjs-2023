@@ -3,7 +3,7 @@ import { runOcr } from "./ocr.js";
 import { FileUpload } from "./components.js";
 import { trace } from "@opentelemetry/api";
 
-const tracer = trace.getTracer("image-ocr");
+export const tracer = trace.getTracer("image-ocr");
 
 export async function handleRoot(ctx: Context) {
 	return ctx.html(<FileUpload />);
