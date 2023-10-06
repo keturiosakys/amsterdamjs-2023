@@ -1,3 +1,4 @@
+import "./instrumentation.js";
 import {
 	Objective,
 	ObjectiveLatency,
@@ -9,7 +10,6 @@ import { serve } from "@hono/node-server";
 import { logger } from "hono/logger";
 import { handleImageOcr, handleRoot } from "./handlers.js";
 import { Hono } from "hono";
-import "./instrumentation.js";
 
 const app = new Hono();
 
