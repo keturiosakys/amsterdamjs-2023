@@ -4,6 +4,8 @@ import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";
 import { OTLPMetricExporter } from "@opentelemetry/exporter-metrics-otlp-proto";
 import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentations-node";
 import { diag, DiagConsoleLogger, DiagLogLevel } from "@opentelemetry/api";
+import { AsyncHooksContextManager } from "@opentelemetry/context-async-hooks";
+
 
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.ALL);
 
@@ -18,7 +20,11 @@ const sdk = new NodeSDK({
 	traceExporter: new OTLPTraceExporter({
 		url: `${exportEndpoint}/v1/traces`,
 	}),
-	instrumentations: [getNodeAutoInstrumentations()],
+	instrumentations: [getNodeAutoInstrumentations({
+		"@opentelemetry/instrumentation-fs": {
+			enabled: false
+		}
+	})],
 });
 
 sdk.start();
