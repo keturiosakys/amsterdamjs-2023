@@ -9,12 +9,8 @@ import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";
 import { Resource } from "@opentelemetry/resources";
 import { NodeSDK } from "@opentelemetry/sdk-node";
 import { mode } from "./util.js";
-import {
-	PeriodicExportingMetricReader,
-	ConsoleMetricExporter,
-} from "@opentelemetry/sdk-metrics";
 
-diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.ALL);
+diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.ERROR);
 
 const exportEndpoint =
 	mode === "prod"
@@ -22,9 +18,6 @@ const exportEndpoint =
 		: "http://localhost:4318";
 
 const sdk = new NodeSDK({
-	metricReader: new PeriodicExportingMetricReader({
-		exporter: new ConsoleMetricExporter(),
-	}),
 	traceExporter: new OTLPTraceExporter({
 		url: `${exportEndpoint}/v1/traces`,
 	}),
@@ -44,5 +37,4 @@ sdk.start();
 
 export const tracer = trace.getTracer("image-ocr");
 
-diag.info(`Tracing endpoint: ${exportEndpoint}`);
 diag.info("Tracing initialized");
