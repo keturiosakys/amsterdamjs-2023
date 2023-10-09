@@ -1,5 +1,6 @@
 import { createWorker } from "tesseract.js";
-import { tracer } from "./handlers.js";
+import { tracer } from "./instrumentation.js";
+import { SpanStatusCode } from "@opentelemetry/api";
 
 export type ImageProperties = {
 	width: number;
@@ -9,12 +10,24 @@ export type ImageProperties = {
 
 export const runOcr = async function runOcr(imageBuffer: Buffer) {
 	return tracer.startActiveSpan("runOcr", async (activeSpan) => {
-		const worker = await createWorker("eng", 1);
+		try {
+			const worker = await createWorker("eng", 1);
 
-		const {
-			data: { text },
+			const {
+				data: { text },
 			} = await worker.recognize(imageBuffer);
 
-		return text;
+			return text;
+		} catch (error) {
+			if (typeof error === "object" && error !== null) {
+				const err = error as Error;
+				activeSpan.setStatus({
+					code: SpanStatusCode.ERROR,
+					message: err.message,
+				});
+			}
+		} finally {
+			activeSpan.end();
+		}
 	});
 };
